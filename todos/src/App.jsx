@@ -1,4 +1,5 @@
 import "./App.css";
+import NewTodo from "./components/NewTodo";
 // import { useSelector } from "react-redux";
 import TodoList from "./components/TodoList";
 
@@ -8,6 +9,7 @@ function App() {
 
   return (
     <>
+      <NewTodo />
       <TodoList />
     </>
   );
