@@ -6,6 +6,7 @@ function TodoList() {
   const todos = useSelector((store) => store.todo.todos);
   const dispatch = useDispatch();
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
+  const search = useSelector((store) => store.todo.search);
 
   // Remove a todo
   const handleRemoveTodo = (id) => {
@@ -19,10 +20,15 @@ function TodoList() {
 
   // Filter todos
   const filteredTodos = todos.filter((todo) => {
-    if (selectedFilter === "Completed") return todo.completed;
-    if (selectedFilter === "Uncompleted") return !todo.completed;
+    const searchResults = todo.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
 
-    return true;
+    if (selectedFilter === "Completed") return searchResults && todo.completed;
+    if (selectedFilter === "Uncompleted")
+      return searchResults && !todo.completed;
+
+    return searchResults;
   });
 
   return (

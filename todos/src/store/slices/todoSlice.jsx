@@ -6,6 +6,7 @@ const initialState = {
     { id: 2, name: "washing", completed: false },
     { id: 3, name: "walking", completed: false },
   ],
+  search: "",
 };
 
 export const todoSlice = createSlice({
@@ -24,9 +25,12 @@ export const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.todos.push(action.payload);
     },
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
   },
 });
 
-export const { removeTodo, toggleTodo, addTodo} = todoSlice.actions;
+export const { removeTodo, toggleTodo, addTodo, setSearch } = todoSlice.actions;
 
 export default todoSlice.reducer;
