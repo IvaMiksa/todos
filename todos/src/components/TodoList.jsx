@@ -5,8 +5,11 @@ import { removeTodo, toggleTodo } from "../store/slices/todoSlice";
 function TodoList() {
   const todos = useSelector((store) => store.todo.todos);
   const dispatch = useDispatch();
-  const selectedFilter = useSelector((state) => state.filter.selectedFilter);
+  const selectedStatus = useSelector((state) => state.filter.selectedStatus);
   const search = useSelector((store) => store.todo.search);
+  const selectedPriority = useSelector(
+    (state) => state.filter.selectedPriority
+  );
 
   // Remove a todo
   const handleRemoveTodo = (id) => {
@@ -20,15 +23,21 @@ function TodoList() {
 
   // Filter todos
   const filteredTodos = todos.filter((todo) => {
+    // Search filter
     const searchResults = todo.name
       .toLowerCase()
       .includes(search.toLowerCase());
 
-    if (selectedFilter === "Completed") return searchResults && todo.completed;
-    if (selectedFilter === "Uncompleted")
-      return searchResults && !todo.completed;
+    // Status filter
+    if (selectedStatus === "Completed") return todo.completed;
+    if (selectedStatus === "Uncompleted") return !todo.completed;
 
-    return searchResults;
+    // Priority filter
+    if (selectedPriority === "High") return todo.priority === "High";
+    if (selectedPriority === "Medium") return todo.priority === "Medium";
+    if (selectedPriority === "Low") return todo.priority === "Low";
+
+    return searchResults && selectedStatus && selectedPriority;
   });
 
   // Sort todos by priority

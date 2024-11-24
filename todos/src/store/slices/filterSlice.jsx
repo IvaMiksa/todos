@@ -1,19 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedFilter: "All",
+  selectedStatus: "All",
+  selectedPriority: "All",
 };
 
 export const filterSlice = createSlice({
   name: "filter",
   initialState: initialState,
   reducers: {
-    setFilter: (state, action) => {
-      state.selectedFilter = action.payload;
+    setStatus: (state, action) => {
+      state.selectedStatus = action.payload;
+    },
+    setPriority: (state, action) => {
+      state.selectedPriority = action.payload;
     },
   },
 });
 
-export const { setFilter } = filterSlice.actions;
+export const { setStatus, setPriority } = filterSlice.actions;
 
 export default filterSlice.reducer;
