@@ -5,6 +5,7 @@ import { removeTodo, toggleTodo } from "../store/slices/todoSlice";
 function TodoList() {
   const todos = useSelector((store) => store.todo.todos);
   const dispatch = useDispatch();
+  const selectedFilter = useSelector((state) => state.filter.selectedFilter);
 
   // Remove a todo
   const handleRemoveTodo = (id) => {
@@ -16,9 +17,17 @@ function TodoList() {
     dispatch(toggleTodo(id));
   };
 
+  // Filter todos
+  const filteredTodos = todos.filter((todo) => {
+    if (selectedFilter === "Completed") return todo.completed;
+    if (selectedFilter === "Uncompleted") return !todo.completed;
+
+    return true;
+  });
+
   return (
     <ul>
-      {todos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <TodoItem
           key={todo.id}
           todo={todo}
