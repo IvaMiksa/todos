@@ -31,9 +31,16 @@ function TodoList() {
     return searchResults;
   });
 
+  // Sort todos by priority
+  const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+
+  const sortedTodos = filteredTodos.slice().sort((a, b) => {
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
+  });
+
   return (
     <ul>
-      {filteredTodos.map((todo) => (
+      {sortedTodos.map((todo) => (
         <TodoItem
           key={todo.id}
           todo={todo}
