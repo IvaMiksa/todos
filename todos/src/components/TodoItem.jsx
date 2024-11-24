@@ -9,7 +9,7 @@ function TodoItem({ todo, handleRemoveTodo, handleToggleTodo }) {
             cursor: "pointer",
           }}
         >
-          {todo.name}
+          {todo.name} - <b>{todo.priority}</b>
         </p>
         <button onClick={handleRemoveTodo}>X</button>
       </li>

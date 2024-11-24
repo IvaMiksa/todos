@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [
-    { id: 1, name: "cleaning", completed: false },
-    { id: 2, name: "washing", completed: false },
-    { id: 3, name: "walking", completed: false },
+    { id: 1, name: "cleaning", completed: false, priority: "Medium" },
+    { id: 2, name: "washing", completed: false, priority: "High" },
+    { id: 3, name: "walking", completed: false, priority: "Low" },
   ],
   search: "",
 };
