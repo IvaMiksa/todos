@@ -24,9 +24,8 @@ function TodoList() {
   // Filter todos
   const filteredTodos = todos.filter((todo) => {
     // Search filter
-    const searchResults = todo.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    const searchResults =
+      todo.name?.toLowerCase().includes(search?.toLowerCase() || "") || false; 
 
     // Status filter
     if (selectedStatus === "Completed") return todo.completed;
