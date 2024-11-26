@@ -1,15 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
-import { removeTodo, toggleTodo } from "../store/slices/todoSlice";
+import {
+  removeTodo,
+  setCurrentPage,
+  toggleTodo,
+} from "../store/slices/todoSlice";
 
 function TodoList() {
   const todos = useSelector((store) => store.todo.todos);
   const dispatch = useDispatch();
-  const selectedStatus = useSelector((state) => state.filter.selectedStatus);
-  const search = useSelector((store) => store.todo.search);
+  const selectedStatus = useSelector((store) => store.filter.selectedStatus);
+  const search = useSelector((store) => store.todo.search) || "";
   const selectedPriority = useSelector(
-    (state) => state.filter.selectedPriority
+    (store) => store.filter.selectedPriority
   );
+  const currentPage = useSelector((store) => store.todo.currentPage) || 1;
+  const todosPerPage = useSelector((store) => store.todo.todosPerPage) || 5;
+  //const state = useSelector((state) => state);
+  //console.log("Redux State:", state);
 
   // Remove a todo
   const handleRemoveTodo = (id) => {
@@ -25,7 +33,7 @@ function TodoList() {
   const filteredTodos = todos.filter((todo) => {
     // Search filter
     const searchResults =
-      todo.name?.toLowerCase().includes(search?.toLowerCase() || "") || false; 
+      todo.name?.toLowerCase().includes(search?.toLowerCase() || "") || false;
 
     // Status filter
     if (selectedStatus === "Completed") return todo.completed;
@@ -46,17 +54,52 @@ function TodoList() {
     return priorityOrder[a.priority] - priorityOrder[b.priority];
   });
 
+  // Pagination
+  const totalPages = Math.max(1, Math.ceil(sortedTodos.length / todosPerPage));
+  const indexOfLastTodo = currentPage * todosPerPage;
+  const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+  const paginatedTodos = sortedTodos.slice(indexOfFirstTodo, indexOfLastTodo);
+
+  //console.log("sorted todos:", sortedTodos);
+  //console.log("paginated todos:", paginatedTodos);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      dispatch(setCurrentPage(currentPage + 1));
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      dispatch(setCurrentPage(currentPage - 1));
+    }
+  };
+
   return (
-    <ul>
-      {sortedTodos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          handleRemoveTodo={() => handleRemoveTodo(todo.id)}
-          handleToggleTodo={() => handleToggleTodo(todo.id)}
-        />
-      ))}
-    </ul>
+    <div>
+      <ul>
+        {paginatedTodos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            handleRemoveTodo={() => handleRemoveTodo(todo.id)}
+            handleToggleTodo={() => handleToggleTodo(todo.id)}
+          />
+        ))}
+      </ul>
+
+      <div>
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>
+          {currentPage} / {totalPages || 1}
+        </span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
+      </div>
+    </div>
   );
 }
 
