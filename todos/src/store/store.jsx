@@ -12,6 +12,7 @@ const persistedState = {
     todos: loadFromLocalStorage("todos") || [],
   },
 };
+//console.log("persisted todos from LS:", persistedState.todo.todos);
 
 const store = configureStore({
   reducer: {

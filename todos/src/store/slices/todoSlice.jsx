@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  todos: [
-    { id: 1, name: "cleaning", completed: false, priority: "Medium" },
-    { id: 2, name: "washing", completed: false, priority: "High" },
-    { id: 3, name: "walking", completed: false, priority: "Low" },
-  ],
+  todos: [],
   search: "",
+  currentPage: 1,
+  todosPerPage: 5,
 };
 
 export const todoSlice = createSlice({
@@ -28,9 +26,22 @@ export const todoSlice = createSlice({
     setSearch: (state, action) => {
       state.search = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+    setTodosPerPage: (state, action) => {
+      state.todosPerPage = action.payload;
+    },
   },
 });
 
-export const { removeTodo, toggleTodo, addTodo, setSearch } = todoSlice.actions;
+export const {
+  removeTodo,
+  toggleTodo,
+  addTodo,
+  setSearch,
+  setCurrentPage,
+  setTodosPerPage,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;
