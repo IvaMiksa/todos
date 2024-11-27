@@ -76,8 +76,8 @@ function TodoList() {
   };
 
   return (
-    <div>
-      <ul>
+    <div className="w-full bg-white p-4 rounded shadow space-y-4">
+      <ul className="space-y-2">
         {paginatedTodos.map((todo) => (
           <TodoItem
             key={todo.id}
@@ -88,14 +88,22 @@ function TodoList() {
         ))}
       </ul>
 
-      <div>
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded shadow hover:bg-gray-400 disabled:opacity-50"
+        >
           Previous
         </button>
         <span>
           {currentPage} / {totalPages || 1}
         </span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded shadow hover:bg-gray-400 disabled:opacity-50"
+        >
           Next
         </button>
       </div>
