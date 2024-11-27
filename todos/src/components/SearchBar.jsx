@@ -11,12 +11,13 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <input
         type="text"
         placeholder="Search todos"
         value={search}
         onChange={handleChange}
+        className="p-2 rounded-sm w-full"
       />
     </div>
   );

@@ -9,32 +9,38 @@ function Filter() {
   );
 
   return (
-    <div>
-      <span>Filter by: </span>
-      <label htmlFor="priority-filter">
-        <strong>Priority</strong>
-      </label>
-      <select
-        value={selectedPriority}
-        onChange={(e) => dispatch(setPriority(e.target.value))}
-      >
-        <option value="All">All</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
+    <div className="w-full flex justify-between items-center space-x-4">
+      <div className="flex items-center space-x-2">
+        <span>Filter by: </span>
+        <label htmlFor="priority-filter">
+          <strong className="mr-2">Priority</strong>
+        </label>
+        <select
+          value={selectedPriority}
+          onChange={(e) => dispatch(setPriority(e.target.value))}
+          className="rounded-sm p-2 mr-2"
+        >
+          <option value="All">All</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
 
-      <label htmlFor="status-filter">
-        <strong>Status</strong>
-      </label>
-      <select
-        value={selectedStatus}
-        onChange={(e) => dispatch(setStatus(e.target.value))}
-      >
-        <option value="All">All</option>
-        <option value="Completed">Completed</option>
-        <option value="Uncompleted">Uncompleted</option>
-      </select>
+      <div className="flex items-center space-x-2">
+        <label htmlFor="status-filter">
+          <strong className="mr-2">Status</strong>
+        </label>
+        <select
+          value={selectedStatus}
+          onChange={(e) => dispatch(setStatus(e.target.value))}
+          className="rounded-sm p-2"
+        >
+          <option value="All">All</option>
+          <option value="Completed">Completed</option>
+          <option value="Uncompleted">Uncompleted</option>
+        </select>
+      </div>
 
       {/*Radio buttons
       <label>
