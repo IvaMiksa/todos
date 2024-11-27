@@ -6,8 +6,8 @@ import TodoList from "./components/TodoList";
 
 function App() {
   return (
-    <div className="bg-gradient-to-r from-sky-500 to-indigo-500 min-h-screen flex flex-col justify-center items-center w-full p-6">
-      <div className="w-full max-w-xl space-y-4">
+    <div className="min-h-screen flex flex-col justify-center items-center w-full p-6 bg-custom-image bg-cover bg-center bg-no-repeat">
+      <div className="w-full max-w-xl bg-white bg-opacity-80 rounded-lg p-6 space-y-4 shadow-lg">
         <SearchBar />
         <NewTodo />
         <Filter />
