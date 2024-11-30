@@ -1,4 +1,8 @@
-function TodoItem({ todo, handleRemoveTodo, handleToggleTodo }) {
+function TodoItem({
+  todo,
+  handleRemoveTodo,
+  handleToggleTodo
+}) {
   return (
     <li
       className={`flex justify-between items-center w-full p-4 mb-2 rounded shadow ${
@@ -19,6 +23,7 @@ function TodoItem({ todo, handleRemoveTodo, handleToggleTodo }) {
         >
           {todo.name}
         </span>
+        {/*
         <span
           className={`px-2 py-1 text-sm rounded ${
             todo.priority === "High"
@@ -29,8 +34,9 @@ function TodoItem({ todo, handleRemoveTodo, handleToggleTodo }) {
           }`}
         >
           {todo.priority}
-        </span>
+        </span>*/}
       </div>
+
       <button
         onClick={handleRemoveTodo}
         className="text-red-500 hover:text-red-700"

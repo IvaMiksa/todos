@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 function NewTodo() {
   const dispatch = useDispatch();
   const [newTodo, setNewTodo] = useState("");
-  const [priority, setPriority] = useState("Medium");
+  //const [priority, setPriority] = useState("Medium");
 
   const handleChange = (e) => {
     setNewTodo(e.target.value);
@@ -18,7 +18,7 @@ function NewTodo() {
       id: Date.now(),
       name: newTodo,
       completed: false,
-      priority: priority,
+      //priority: priority,
     };
 
     // Don't allow empty inputs
@@ -29,7 +29,7 @@ function NewTodo() {
 
     dispatch(addTodo(todo));
     setNewTodo("");
-    setPriority("Medium");
+    //setPriority("Medium");
     //console.log(todo);
   };
 
@@ -43,6 +43,7 @@ function NewTodo() {
           onChange={handleChange}
           className="flex-1 p-3 border rounded-sm shadow"
         />
+        {/*
         <select
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
@@ -51,7 +52,7 @@ function NewTodo() {
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
-        </select>
+        </select>*/}
         <button type="submit">Add</button>
       </form>
     </div>
