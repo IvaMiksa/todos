@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 import {
+  editTodo,
   removeTodo,
   setCurrentPage,
   toggleTodo,
@@ -29,6 +30,11 @@ function TodoList() {
     dispatch(toggleTodo(id));
   };
 
+  // Edit todo
+  const handleEditTodo = (id, newName) => {
+    dispatch(editTodo({id, newName}));
+  };
+
   // Filter todos
   const filteredTodos = todos.filter((todo) => {
     // Search filter
@@ -39,12 +45,14 @@ function TodoList() {
     if (selectedStatus === "Completed") return todo.completed;
     if (selectedStatus === "Uncompleted") return !todo.completed;
 
+   /* 
     // Priority filter
     if (selectedPriority === "High") return todo.priority === "High";
     if (selectedPriority === "Medium") return todo.priority === "Medium";
     if (selectedPriority === "Low") return todo.priority === "Low";
+    */
 
-    return searchResults && selectedStatus && selectedPriority;
+    return searchResults && selectedStatus; //&& selectedPriority;
   });
 
   // Sort todos by priority
@@ -84,6 +92,7 @@ function TodoList() {
             todo={todo}
             handleRemoveTodo={() => handleRemoveTodo(todo.id)}
             handleToggleTodo={() => handleToggleTodo(todo.id)}
+            handleEditTodo={(newName) => handleEditTodo(todo.id, newName)}
           />
         ))}
       </ul>

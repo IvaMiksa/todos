@@ -1,8 +1,25 @@
+import { useState } from "react";
+import {
+  PencilSquareIcon,
+  TrashIcon,
+  CheckIcon,
+} from "@heroicons/react/20/solid";
+
 function TodoItem({
   todo,
   handleRemoveTodo,
-  handleToggleTodo
+  handleToggleTodo,
+  handleEditTodo,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newName, setNewName] = useState(todo.name);
+
+  const handleSaveEdit = () => {
+    if (newName.trim()) {
+      handleEditTodo(newName);
+      setIsEditing(false);
+    }
+  };
   return (
     <li
       className={`flex justify-between items-center w-full p-4 mb-2 rounded shadow ${
@@ -16,13 +33,22 @@ function TodoItem({
           onChange={handleToggleTodo}
           className="mr-2 cursor-pointer"
         />
-        <span
-          className={`${
-            todo.completed ? "line-through text-gray-500" : "text-gray-900"
-          }`}
-        >
-          {todo.name}
-        </span>
+        {isEditing ? (
+          <input
+            type="text"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            className="border px-2 py-1 rounded"
+          />
+        ) : (
+          <span
+            className={`${
+              todo.completed ? "line-through text-gray-500" : "text-gray-900"
+            }`}
+          >
+            {todo.name}
+          </span>
+        )}
         {/*
         <span
           className={`px-2 py-1 text-sm rounded ${
@@ -37,12 +63,29 @@ function TodoItem({
         </span>*/}
       </div>
 
-      <button
-        onClick={handleRemoveTodo}
-        className="text-red-500 hover:text-red-700"
-      >
-        X
-      </button>
+      <div className="flex space-x-2">
+        {isEditing ? (
+          <button
+            onClick={handleSaveEdit}
+            className="text-green-400 hover:text-green-500"
+          >
+            <CheckIcon className="h-5 w-5" />
+          </button>
+        ) : (
+          <button
+            onClick={() => setIsEditing(true)}
+            className="text-blue-400 hover:text-blue-500"
+          >
+            <PencilSquareIcon className="h-5 w-5" />
+          </button>
+        )}
+        <button
+          onClick={handleRemoveTodo}
+          className="text-red-400 hover:text-red-500"
+        >
+          <TrashIcon className="h-5 w-5" />
+        </button>
+      </div>
     </li>
   );
 }

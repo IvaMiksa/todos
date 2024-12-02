@@ -23,6 +23,16 @@ export const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.todos.push(action.payload);
     },
+    editTodo: (state, action) => {
+      const { id, newName } = action.payload;
+
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === id ? { ...todo, name: newName } : todo
+        ),
+      };
+    },
     setSearch: (state, action) => {
       state.search = action.payload;
     },
@@ -39,6 +49,7 @@ export const {
   removeTodo,
   toggleTodo,
   addTodo,
+  editTodo,
   setSearch,
   setCurrentPage,
   setTodosPerPage,
