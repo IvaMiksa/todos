@@ -10,6 +10,9 @@ import {
 const persistedState = {
   todo: {
     todos: loadFromLocalStorage("todos") || [],
+    search: "",
+    currentPage: 1,
+    todosPerPage: 5,
   },
 };
 //console.log("persisted todos from LS:", persistedState.todo.todos);
@@ -25,6 +28,7 @@ const store = configureStore({
 // Save redux state to LS whenever it changes
 store.subscribe(() => {
   saveToLocalStorage("todos", store.getState().todo.todos);
+  //console.log("redux state:", store.getState());
 });
 
 export default store;
