@@ -10,11 +10,9 @@ import {
 function TodoList() {
   const todos = useSelector((store) => store.todo.todos);
   const dispatch = useDispatch();
-  const selectedStatus = useSelector((store) => store.filter.selectedStatus);
+  const selectedFilter = useSelector((store) => store.filter.filter);
   const search = useSelector((store) => store.todo.search) || "";
-  const selectedPriority = useSelector(
-    (store) => store.filter.selectedPriority
-  );
+
   const currentPage = useSelector((store) => store.todo.currentPage) || 1;
   const todosPerPage = useSelector((store) => store.todo.todosPerPage) || 5;
   //const state = useSelector((state) => state);
@@ -32,7 +30,7 @@ function TodoList() {
 
   // Edit todo
   const handleEditTodo = (id, newName) => {
-    dispatch(editTodo({id, newName}));
+    dispatch(editTodo({ id, newName }));
   };
 
   // Filter todos
@@ -42,17 +40,17 @@ function TodoList() {
       todo.name?.toLowerCase().includes(search?.toLowerCase() || "") || false;
 
     // Status filter
-    if (selectedStatus === "Completed") return todo.completed;
-    if (selectedStatus === "Uncompleted") return !todo.completed;
+    if (selectedFilter === "Completed") return todo.completed;
+    if (selectedFilter === "Uncompleted") return !todo.completed;
 
-   /* 
+    /* 
     // Priority filter
     if (selectedPriority === "High") return todo.priority === "High";
     if (selectedPriority === "Medium") return todo.priority === "Medium";
     if (selectedPriority === "Low") return todo.priority === "Low";
     */
 
-    return searchResults && selectedStatus; //&& selectedPriority;
+    return searchResults && selectedFilter; //&& selectedPriority;
   });
 
   // Sort todos by priority
