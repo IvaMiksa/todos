@@ -5,6 +5,7 @@ const initialState = {
   search: "",
   currentPage: 1,
   todosPerPage: 5,
+  newTodo: "",
 };
 
 export const todoSlice = createSlice({
@@ -42,6 +43,9 @@ export const todoSlice = createSlice({
     setTodosPerPage: (state, action) => {
       state.todosPerPage = action.payload;
     },
+    setNewTodo: (state, action) => {
+      state.newTodo = action.payload;
+    },
   },
 });
 
@@ -53,6 +57,7 @@ export const {
   setSearch,
   setCurrentPage,
   setTodosPerPage,
+  setNewTodo,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;
