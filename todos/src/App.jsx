@@ -1,5 +1,5 @@
 import "./index.css";
-import NewTodo from "./components/NewTodo";
+import NewTodo from "./components/NewTodo/NewTodo";
 import TodoList from "./components/TodoList";
 import TodoSearch from "./components/TodoSearch/TodoSearch";
 import TodoFilter from "./components/TodoFilter/TodoFilter";
