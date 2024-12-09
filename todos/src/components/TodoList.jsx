@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import TodoItem from "./TodoItem";
+import TodoItem from "./TodoItem/TodoItem";
 import {
   editTodo,
   removeTodo,
@@ -28,9 +28,12 @@ function TodoList() {
     dispatch(toggleTodo(id));
   };
 
-  // Edit todo
-  const handleEditTodo = (id, newName) => {
-    dispatch(editTodo({ id, newName }));
+  // Edit/Save todo
+  const handleEditSaveTodo = (id, newName, setIsEditing) => {
+    if (newName.trim()) {
+      dispatch(editTodo({ id, newName }));
+      setIsEditing(false);
+    }
   };
 
   // Filter todos
@@ -90,7 +93,9 @@ function TodoList() {
             todo={todo}
             handleRemoveTodo={() => handleRemoveTodo(todo.id)}
             handleToggleTodo={() => handleToggleTodo(todo.id)}
-            handleEditTodo={(newName) => handleEditTodo(todo.id, newName)}
+            handleEditSaveTodo={(newName, setIsEditing) =>
+              handleEditSaveTodo(todo.id, newName, setIsEditing)
+            }
           />
         ))}
       </ul>
