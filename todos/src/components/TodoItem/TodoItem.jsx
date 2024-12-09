@@ -4,22 +4,17 @@ import {
   TrashIcon,
   CheckIcon,
 } from "@heroicons/react/20/solid";
+import PropTypes from "prop-types";
 
 function TodoItem({
   todo,
   handleRemoveTodo,
   handleToggleTodo,
-  handleEditTodo,
+  handleEditSaveTodo,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(todo.name);
 
-  const handleSaveEdit = () => {
-    if (newName.trim()) {
-      handleEditTodo(newName);
-      setIsEditing(false);
-    }
-  };
   return (
     <li
       className={`flex justify-between items-center w-full p-4 mb-2 rounded shadow ${
@@ -49,24 +44,12 @@ function TodoItem({
             {todo.name}
           </span>
         )}
-        {/*
-        <span
-          className={`px-2 py-1 text-sm rounded ${
-            todo.priority === "High"
-              ? "bg-red-500 text-white"
-              : todo.priority === "Medium"
-              ? "bg-yellow-500 text-white"
-              : "bg-blue-500 text-white"
-          }`}
-        >
-          {todo.priority}
-        </span>*/}
       </div>
 
       <div className="flex space-x-2">
         {isEditing ? (
           <button
-            onClick={handleSaveEdit}
+            onClick={() => handleEditSaveTodo(newName, setIsEditing)}
             className="text-green-400 hover:text-green-500"
           >
             <CheckIcon className="h-5 w-5" />
@@ -89,5 +72,15 @@ function TodoItem({
     </li>
   );
 }
+
+TodoItem.propTypes = {
+  todo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  }).isRequired,
+  handleRemoveTodo: PropTypes.func.isRequired,
+  handleToggleTodo: PropTypes.func.isRequired,
+  handleEditSaveTodo: PropTypes.func.isRequired,
+};
 
 export default TodoItem;
