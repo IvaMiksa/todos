@@ -46,30 +46,15 @@ function TodoList() {
     if (selectedFilter === "Completed") return todo.completed;
     if (selectedFilter === "Uncompleted") return !todo.completed;
 
-    /* 
-    // Priority filter
-    if (selectedPriority === "High") return todo.priority === "High";
-    if (selectedPriority === "Medium") return todo.priority === "Medium";
-    if (selectedPriority === "Low") return todo.priority === "Low";
-    */
-
-    return searchResults && selectedFilter; //&& selectedPriority;
-  });
-
-  // Sort todos by priority
-  const priorityOrder = { High: 1, Medium: 2, Low: 3 };
-
-  const sortedTodos = filteredTodos.slice().sort((a, b) => {
-    return priorityOrder[a.priority] - priorityOrder[b.priority];
+    return searchResults && selectedFilter; 
   });
 
   // Pagination
-  const totalPages = Math.max(1, Math.ceil(sortedTodos.length / todosPerPage));
+  const totalPages = Math.max(1, Math.ceil(filteredTodos.length / todosPerPage));
   const indexOfLastTodo = currentPage * todosPerPage;
   const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-  const paginatedTodos = sortedTodos.slice(indexOfFirstTodo, indexOfLastTodo);
+  const paginatedTodos = filteredTodos.slice(indexOfFirstTodo, indexOfLastTodo);
 
-  //console.log("sorted todos:", sortedTodos);
   //console.log("paginated todos:", paginatedTodos);
 
   const handleNextPage = () => {
