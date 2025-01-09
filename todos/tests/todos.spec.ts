@@ -86,7 +86,59 @@ test.describe("Todos App", () => {
     await expect(deletedTodo).not.toBeVisible();
   });
 
-  //test('edit a todo')
+  test("edit a completed todo", async ({ page }) => {
+    await page.goto("http://localhost:5173");
+
+    // Add a new todo
+    const inputField = page.locator('input[placeholder="Your next todo"]');
+    await inputField.fill("Take a walk");
+    const buttonAdd = page.locator('button:text-is("Add")');
+    await buttonAdd.click();
+
+    // Mark todo as completed
+    const checkbox = page.locator('input[type="checkbox"]');
+    await checkbox.click();
+
+    // Edit completed todo
+    const editIcon = page.locator("#edit-icon");
+    await editIcon.click();
+
+    const inputFieldEdit = page.locator('input[value="Take a walk"]');
+    await inputFieldEdit.fill("Take a bath");
+
+    const editSaveIcon = page.locator('#edit-save-icon');
+    await editSaveIcon.click();
+
+    // Assert the edited todo is visible
+    const editedTodo = page.locator(':text-is("Take a bath")');
+    await expect(editedTodo).toBeVisible();
+  });
+
+
+  test('edit a uncompleted todo', async ({page}) => {
+    await page.goto("http://localhost:5173");
+
+    // Add a new todo
+    const inputField = page.locator('input[placeholder="Your next todo"]');
+    await inputField.fill("Take a walk");
+    const buttonAdd = page.locator('button:text-is("Add")');
+    await buttonAdd.click();
+
+    // Edit uncompleted todo
+    const editIcon = page.locator("#edit-icon");
+    await editIcon.click();
+
+    const inputFieldEdit = page.locator('input[value="Take a walk"]');
+    await inputFieldEdit.fill("Take a bath");
+
+    const editSaveIcon = page.locator('#edit-save-icon');
+    await editSaveIcon.click();
+
+    // Assert the edited todo is visible
+    const editedTodo = page.locator(':text-is("Take a bath")');
+    await expect(editedTodo).toBeVisible();
+
+  })
   //test('search todos')
   //test('filter by status')
   //test('next page')

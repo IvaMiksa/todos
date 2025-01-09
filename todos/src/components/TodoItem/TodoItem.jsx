@@ -51,6 +51,7 @@ function TodoItem({
           <button
             onClick={() => handleEditSaveTodo(newName, setIsEditing)}
             className="text-green-400 hover:text-green-500"
+            id="edit-save-icon"
           >
             <CheckIcon className="h-5 w-5" />
           </button>
@@ -58,6 +59,7 @@ function TodoItem({
           <button
             onClick={() => setIsEditing(true)}
             className="text-blue-400 hover:text-blue-500"
+            id="edit-icon"
           >
             <PencilSquareIcon className="h-5 w-5" />
           </button>
@@ -65,6 +67,7 @@ function TodoItem({
         <button
           onClick={handleRemoveTodo}
           className="text-red-400 hover:text-red-500"
+          id="delete-icon"
         >
           <TrashIcon className="h-5 w-5" />
         </button>
