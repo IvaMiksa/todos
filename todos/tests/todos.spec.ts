@@ -106,7 +106,7 @@ test.describe("Todos App", () => {
     const inputFieldEdit = page.locator('input[value="Take a walk"]');
     await inputFieldEdit.fill("Take a bath");
 
-    const editSaveIcon = page.locator('#edit-save-icon');
+    const editSaveIcon = page.locator("#edit-save-icon");
     await editSaveIcon.click();
 
     // Assert the edited todo is visible
@@ -114,8 +114,7 @@ test.describe("Todos App", () => {
     await expect(editedTodo).toBeVisible();
   });
 
-
-  test('edit a uncompleted todo', async ({page}) => {
+  test("edit a uncompleted todo", async ({ page }) => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
@@ -131,15 +130,40 @@ test.describe("Todos App", () => {
     const inputFieldEdit = page.locator('input[value="Take a walk"]');
     await inputFieldEdit.fill("Take a bath");
 
-    const editSaveIcon = page.locator('#edit-save-icon');
+    const editSaveIcon = page.locator("#edit-save-icon");
     await editSaveIcon.click();
 
     // Assert the edited todo is visible
     const editedTodo = page.locator(':text-is("Take a bath")');
     await expect(editedTodo).toBeVisible();
+  });
 
-  })
-  //test('search todos')
+  test("search todos", async ({ page }) => {
+    await page.goto("http://localhost:5173");
+
+    // Add a new todo
+    const inputField = page.locator('input[placeholder="Your next todo"]');
+    await inputField.fill("Take a walk");
+    const buttonAdd = page.locator('button:text-is("Add")');
+    await buttonAdd.click();
+
+    // Search for the added todo
+    const inputSearch = page.locator('input[placeholder="Search todos"]');
+    await inputSearch.fill("Take a w");
+
+    // Assert that the search works
+    const searchResult = page.locator(':text-is("Take a walk")');
+    await expect(searchResult).toBeVisible();
+
+    // Assert that case doesn't matter
+    await inputSearch.fill("take a w");
+    await expect(searchResult).toBeVisible();
+
+    // Assert there are no results for invalid input
+    await inputSearch.fill("take a shower");
+    await expect(searchResult).not.toBeVisible();
+
+  });
   //test('filter by status')
   //test('next page')
   //test('previous page')
