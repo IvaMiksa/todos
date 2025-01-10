@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { addTodo } from "../helpers/todosHelpers";
 
 test.describe("Todos App", () => {
   test("app loading", async ({ page }) => {
@@ -10,10 +11,7 @@ test.describe("Todos App", () => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
-    const inputField = page.locator('input[placeholder="Your next todo"]');
-    await inputField.fill("Take a walk");
-    const buttonAdd = page.locator('button:text-is("Add")');
-    await buttonAdd.click();
+    await addTodo(page, "Take a walk");
 
     // Assert the new todo is visible
     const newTodoAdded = page.locator(':text-is("Take a walk")');
@@ -24,10 +22,7 @@ test.describe("Todos App", () => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
-    const inputField = page.locator('input[placeholder="Your next todo"]');
-    await inputField.fill("Take a walk");
-    const buttonAdd = page.locator('button:text-is("Add")');
-    await buttonAdd.click();
+    await addTodo(page, "Take a walk");
 
     // Mark todo as completed
     const checkbox = page.locator('input[type="checkbox"]');
@@ -50,10 +45,7 @@ test.describe("Todos App", () => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
-    const inputField = page.locator('input[placeholder="Your next todo"]');
-    await inputField.fill("Take a walk");
-    const buttonAdd = page.locator('button:text-is("Add")');
-    await buttonAdd.click();
+    await addTodo(page, "Take a walk");
 
     // Mark todo as completed
     const checkbox = page.locator('input[type="checkbox"]');
@@ -72,10 +64,7 @@ test.describe("Todos App", () => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
-    const inputField = page.locator('input[placeholder="Your next todo"]');
-    await inputField.fill("Take a walk");
-    const buttonAdd = page.locator('button:text-is("Add")');
-    await buttonAdd.click();
+    await addTodo(page, "Take a walk");
 
     // Delete uncompleted todo
     const deleteIcon = page.locator("#delete-icon");
@@ -90,10 +79,7 @@ test.describe("Todos App", () => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
-    const inputField = page.locator('input[placeholder="Your next todo"]');
-    await inputField.fill("Take a walk");
-    const buttonAdd = page.locator('button:text-is("Add")');
-    await buttonAdd.click();
+    await addTodo(page, "Take a walk");
 
     // Mark todo as completed
     const checkbox = page.locator('input[type="checkbox"]');
@@ -118,10 +104,7 @@ test.describe("Todos App", () => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
-    const inputField = page.locator('input[placeholder="Your next todo"]');
-    await inputField.fill("Take a walk");
-    const buttonAdd = page.locator('button:text-is("Add")');
-    await buttonAdd.click();
+    await addTodo(page, "Take a walk");
 
     // Edit uncompleted todo
     const editIcon = page.locator("#edit-icon");
@@ -142,10 +125,7 @@ test.describe("Todos App", () => {
     await page.goto("http://localhost:5173");
 
     // Add a new todo
-    const inputField = page.locator('input[placeholder="Your next todo"]');
-    await inputField.fill("Take a walk");
-    const buttonAdd = page.locator('button:text-is("Add")');
-    await buttonAdd.click();
+   await addTodo(page, "Take a walk");
 
     // Search for the added todo
     const inputSearch = page.locator('input[placeholder="Search todos"]');
@@ -295,5 +275,27 @@ test.describe("Todos App", () => {
     await expect(firstPageTodosCount.length).toBe(5);
   });
 
-  //test('persist new todo in local storage')
+  test("persist new todo in local storage", async ({ page }) => {
+    await page.goto("http://localhost:5173");
+
+    // Add a new todo
+    const inputFieldCompletedTodo = page.locator(
+      'input[placeholder="Your next todo"]'
+    );
+    await inputFieldCompletedTodo.fill("Take a walk");
+    const buttonAddCompletedTodo = page.locator('button:text-is("Add")');
+    await buttonAddCompletedTodo.click();
+
+    // Persist data in LS
+    const localStorageData = await page.evaluate(() =>
+      JSON.parse(localStorage.getItem("todos") || "[]")
+    );
+    console.log("local storage data:", localStorageData);
+
+    // Assert the todo exists in local storage
+    expect(localStorageData).toContainEqual({
+      name: "Take a walk",
+      completed: false,
+    });
+  });
 });
