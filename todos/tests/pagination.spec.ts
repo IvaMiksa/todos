@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 
-test("pagination", async ({ page }) => {
-  await page.goto("http://localhost:5173");
+
+test("pagination", async ({ page, baseURL }) => {
+  await page.goto(baseURL);
 
   // Generate 6 todos to get 2 pages
   for (let i = 1; i < 7; i++) {

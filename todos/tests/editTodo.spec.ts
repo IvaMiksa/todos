@@ -1,9 +1,13 @@
 import { test, expect } from "@playwright/test";
 import { addTodo } from "../helpers/todosHelpers";
 
+test.beforeEach('navigate to todos app', async({page, baseURL}) => {
+  await page.goto(baseURL);
+  
+  })
+
 test.describe("edit a todo", () => {
   test("edit a completed todo", async ({ page }) => {
-    await page.goto("http://localhost:5173");
 
     // Add a new todo
     await addTodo(page, "Take a walk");
@@ -28,7 +32,6 @@ test.describe("edit a todo", () => {
   });
 
   test("edit a uncompleted todo", async ({ page }) => {
-    await page.goto("http://localhost:5173");
 
     // Add a new todo
     await addTodo(page, "Take a walk");

@@ -1,8 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { addTodo } from "../helpers/todosHelpers";
 
-test("mark todo as completed", async ({ page }) => {
-    await page.goto("http://localhost:5173");
+
+
+test("mark todo as completed", async ({ page, baseURL }) => {
+  await page.goto(baseURL);
 
     // Add a new todo
     await addTodo(page, "Take a walk");
