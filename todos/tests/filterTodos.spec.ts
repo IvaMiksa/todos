@@ -1,8 +1,12 @@
 import { test, expect } from "@playwright/test";
 
+test.beforeEach('navigate to todos app', async({page, baseURL}) => {
+  await page.goto(baseURL);
+  
+  })
+
 test.describe("filter todos", () => {
   test("filter by status: completed todos", async ({ page }) => {
-    await page.goto("http://localhost:5173");
 
     // Add a new todo
     const inputFieldCompletedTodo = page.locator(
@@ -37,7 +41,6 @@ test.describe("filter todos", () => {
   });
 
   test("filter by status: uncompleted todos", async ({ page }) => {
-    await page.goto("http://localhost:5173");
 
     // Add a new todo
     const inputFieldCompletedTodo = page.locator(
@@ -72,7 +75,6 @@ test.describe("filter todos", () => {
   });
 
   test("filter by status: all todos", async ({ page }) => {
-    await page.goto("http://localhost:5173");
 
     // Add a new todo
     const inputFieldCompletedTodo = page.locator(
