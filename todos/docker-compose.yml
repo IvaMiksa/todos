@@ -1,10 +1,22 @@
 services:
+  todos-app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.todos
+    command: npm run dev -- --host
+    ports:
+      - "5173:5173"
+
   playwright-test:
     image: todos-pw-test
     build:
       context: .
       dockerfile: ./Dockerfile
     command: npx playwright test --project=chromium
+    depends_on:
+      - todos-app
     volumes:
       - ./playwright-report/:/app/playwright-report
       - ./test-results/:/app/test-results
+
+ 
