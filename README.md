@@ -27,36 +27,24 @@ My Todo App is a lightweight task management tool that helps users organize thei
 - Docker Desktop installed locally
 
 #### Run the following command to start the application:
-
-docker compose up
-
- -> The app will be available at http://localhost:5173/
+  docker compose up
 
 #### View the test report by running the following command:
-
- npx playwright show-report
-
- -> The HTML report will be served at http://localhost:9323
-
+  npx playwright show-report
 
 
 ### **Option 2: Install manually**
-
 #### Install dependencies:
   npm install
 
 #### Start the development server:
   npm run dev
 
-  -> The app will be served at http://localhost:5173/
-
 #### Run E2E tests:
   npx playwright test
 
 #### Generate and view the test report:  
   npx playwright show-report
-
-  -> The HTML report will be served at http://localhost:9323
 
 
 ## License
