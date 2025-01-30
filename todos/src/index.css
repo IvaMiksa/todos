@@ -3,23 +3,7 @@
 @tailwind utilities;
 
 button {
-  @apply px-4 py-2 bg-gray-400 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300;
+  @apply px-4 py-2 bg-gray-300 text-white rounded hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300;
 }
-
-/*
-#root {
-max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  /*min-width: 320px;
-  min-height: 100vh;
-}*/
 
 
