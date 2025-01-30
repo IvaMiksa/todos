@@ -6,7 +6,7 @@ test("pagination", async ({ page, baseURL }) => {
 
   // Generate 6 todos to get 2 pages
   for (let i = 1; i < 7; i++) {
-    const inputField = page.locator('input[placeholder="Your next todo"]');
+    const inputField = page.locator('input[placeholder="Add your next todo"]');
     await inputField.fill(`Todo #${i}`);
     const buttonAdd = page.locator('button:text-is("Add")');
     await buttonAdd.click();
