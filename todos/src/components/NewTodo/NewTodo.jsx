@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 function NewTodo({
   buttonSubmit = "Add",
-  placeholder = "Your next todo",
+  placeholder = "Add your next todo",
   type = "text",
 }) {
   const dispatch = useDispatch();
@@ -43,9 +43,9 @@ function NewTodo({
           placeholder={placeholder}
           value={newTodo}
           onChange={handleChange}
-          className="flex-1 p-3 border rounded-sm shadow"
+          className="flex-1 p-3 border rounded-sm shadow border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
-        <button type="submit">{buttonSubmit}</button>
+        <button type="submit" className="bg-blue-300">{buttonSubmit}</button>
       </form>
     </div>
   );

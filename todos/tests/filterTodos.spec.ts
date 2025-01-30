@@ -10,7 +10,7 @@ test.describe("filter todos", () => {
 
     // Add a new todo
     const inputFieldCompletedTodo = page.locator(
-      'input[placeholder="Your next todo"]'
+      'input[placeholder="Add your next todo"]'
     );
     await inputFieldCompletedTodo.fill("Take a walk");
     const buttonAddCompletedTodo = page.locator('button:text-is("Add")');
@@ -22,7 +22,7 @@ test.describe("filter todos", () => {
 
     // Add uncompleted todo
     const inputFieldUncompletedTodo = page.locator(
-      'input[placeholder="Your next todo"]'
+      'input[placeholder="Add your next todo"]'
     );
     await inputFieldUncompletedTodo.fill("Bake a pie");
     const buttonAddUncompletedTodo = page.locator('button:text-is("Add")');
@@ -44,7 +44,7 @@ test.describe("filter todos", () => {
 
     // Add a new todo
     const inputFieldCompletedTodo = page.locator(
-      'input[placeholder="Your next todo"]'
+      'input[placeholder="Add your next todo"]'
     );
     await inputFieldCompletedTodo.fill("Take a walk");
     const buttonAddCompletedTodo = page.locator('button:text-is("Add")');
@@ -56,7 +56,7 @@ test.describe("filter todos", () => {
 
     // Add uncompleted todo
     const inputFieldUncompletedTodo = page.locator(
-      'input[placeholder="Your next todo"]'
+      'input[placeholder="Add your next todo"]'
     );
     await inputFieldUncompletedTodo.fill("Bake a pie");
     const buttonAddUncompletedTodo = page.locator('button:text-is("Add")');
@@ -78,7 +78,7 @@ test.describe("filter todos", () => {
 
     // Add a new todo
     const inputFieldCompletedTodo = page.locator(
-      'input[placeholder="Your next todo"]'
+      'input[placeholder="Add your next todo"]'
     );
     await inputFieldCompletedTodo.fill("Take a walk");
     const buttonAddCompletedTodo = page.locator('button:text-is("Add")');
@@ -90,7 +90,7 @@ test.describe("filter todos", () => {
 
     // Add uncompleted todo
     const inputFieldUncompletedTodo = page.locator(
-      'input[placeholder="Your next todo"]'
+      'input[placeholder="Add your next todo"]'
     );
     await inputFieldUncompletedTodo.fill("Bake a pie");
     const buttonAddUncompletedTodo = page.locator('button:text-is("Add")');

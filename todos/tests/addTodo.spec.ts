@@ -20,7 +20,7 @@ test.describe("add todo", () => {
 
 test("add an empty todo", async({page}) => {
 
-  const inputField = page.locator('input[placeholder="Your next todo"]');
+  const inputField = page.locator('input[placeholder="Add your next todo"]');
   await inputField.fill("");
   const buttonAdd = page.locator('button:text-is("Add")');
   await buttonAdd.click();
